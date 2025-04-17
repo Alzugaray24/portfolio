@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import Image from 'next/image';
 import Link from 'next/link';
 import ExoticBackground from "../components/ExoticBackground";
+import { Navigation } from "@/components/Navigation";
 
 export default function Portfolio() {
   const projects = [
@@ -60,7 +61,8 @@ export default function Portfolio() {
   return (
     <>
       <ExoticBackground />
-      <div className="container mx-auto px-4 py-16 relative z-10">
+      <Navigation />
+      <div className="container mx-auto px-4 py-16 pt-28 md:pt-32 relative z-10">
         <div className="mb-12 text-center">
           <h1 className="text-4xl md:text-5xl font-bold mb-4 text-white">My Portfolio</h1>
           <p className="text-xl text-gray-300 max-w-2xl mx-auto">
@@ -104,9 +106,9 @@ export default function Portfolio() {
         <div className="mt-16 text-center">
           <Button 
             asChild
-            className="bg-white text-black hover:bg-gray-200 px-8 py-3 text-lg"
+            className="glass-button px-8"
           >
-            <Link href="https://github.com/yourusername">SEE MORE PROJECTS</Link>
+            <Link href="/">BACK TO HOME</Link>
           </Button>
         </div>
       </div>

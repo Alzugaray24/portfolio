@@ -4,9 +4,13 @@ import Link from 'next/link';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import { MdEmail, MdPhone } from 'react-icons/md';
 
-export function SocialLinks() {
+interface SocialLinksProps {
+  className?: string;
+}
+
+export function SocialLinks({ className = '' }: SocialLinksProps) {
   return (
-    <div className="flex gap-3 mt-8">
+    <div className={`flex gap-3 mt-8 ${className}`}>
       <Link 
         href="mailto:alzugaray1997@gmail.com" 
         className="bg-black/30 border border-white/10 text-white p-3 rounded-full hover:bg-primary/20 hover:border-primary/30 transition-all" 

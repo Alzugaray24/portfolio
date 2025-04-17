@@ -1,6 +1,5 @@
 "use client";
 
-import { Logo } from "@/components/Logo";
 import { SocialLinks } from "@/components/SocialLinks";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
@@ -8,18 +7,7 @@ import { motion } from "framer-motion";
 
 export function AboutSection() {
   return (
-    <div className="w-full md:w-1/2 bg-transparent p-8 md:p-12 lg:p-16 flex flex-col justify-between relative z-10">
-      {/* Logo */}
-      <div className="mb-16">
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.7 }}
-        >
-          <Logo />
-        </motion.div>
-      </div>
-
+    <div className="hidden md:flex w-full md:w-1/2 bg-transparent p-8 pt-24 md:p-12 md:pt-28 lg:p-16 lg:pt-32 flex-col justify-between relative z-10">
       {/* Main content */}
       <div className="flex-grow flex flex-col justify-center backdrop-blur-sm rounded-2xl p-6 border border-white/5 bg-black/20">
         <motion.div
@@ -46,19 +34,19 @@ export function AboutSection() {
         
         {/* Call to action */}
         <motion.div 
-          className="mt-8 flex gap-4"
+          className="mt-8 flex flex-col sm:flex-row gap-4"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.6 }}
         >
           <Button 
-            className="glass-button"
+            className="glass-button w-full sm:w-auto"
             asChild
           >
             <Link href="#contact">Let's work together</Link>
           </Button>
           <Button 
-            className="glass-button-secondary"
+            className="glass-button-secondary w-full sm:w-auto"
             asChild
           >
             <Link 

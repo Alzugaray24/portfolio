@@ -19,6 +19,7 @@ import ExoticBackground from "@/app/components/ExoticBackground";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import dynamic from "next/dynamic";
+import { Navigation } from "@/components/Navigation";
 
 // Dynamic import for icons - will only load when Skills section is rendered
 const IconsComponent = dynamic(() => import('@/components/IconsComponent'), {
@@ -60,6 +61,9 @@ export default function Home() {
       {/* Background Effect */}
       <ExoticBackground />
       
+      {/* Navigation (global) */}
+      <Navigation />
+      
       <main className="relative z-10">
         {/* Hero Section */}
         <section id="home" className="relative flex flex-col md:flex-row min-h-screen">
@@ -69,7 +73,7 @@ export default function Home() {
         </section>
 
         {/* About Me Section */}
-        <section id="about" className="py-20 relative z-10">
+        <section id="about" className="py-20 pt-32 md:pt-20 relative z-10">
           <div className="max-w-3xl mx-auto px-4">
             {/* ABOUT ME HEADER */}
             <div className="flex justify-center mb-12">
