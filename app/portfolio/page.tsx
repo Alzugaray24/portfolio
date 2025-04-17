@@ -3,18 +3,9 @@
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
-import { useEffect, useState } from 'react';
-import { BackgroundEffects } from "../components/BackgroundEffects";
 import ExoticBackground from "../components/ExoticBackground";
 
 export default function Portfolio() {
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
   const projects = [
     {
       id: 1,
@@ -65,24 +56,6 @@ export default function Portfolio() {
       code: "https://github.com/yourusername/project6"
     }
   ];
-
-  const container = {
-    hidden: { opacity: 0 },
-    show: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.3
-      }
-    }
-  };
-
-  const item = {
-    hidden: { y: 20, opacity: 0 },
-    show: { y: 0, opacity: 1, transition: { type: "spring", stiffness: 100 } }
-  };
-
-  if (!mounted) return null;
 
   return (
     <>

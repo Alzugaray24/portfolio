@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 import { motion } from 'framer-motion';
 
 export default function ExoticBackground() {
@@ -18,41 +18,26 @@ export default function ExoticBackground() {
         }}
       />
       
-      {/* Animated gradient orbs */}
+      {/* Animated gradient orbs - reduced to one with simpler animation */}
       <div className="absolute inset-0">
         <motion.div
-          className="absolute w-[500px] h-[500px] rounded-full bg-gradient-to-r from-purple-600/20 to-blue-500/20 blur-[120px]"
+          className="absolute w-[600px] h-[600px] rounded-full bg-gradient-to-r from-purple-600/20 via-blue-500/20 to-fuchsia-500/20 blur-[150px]"
           animate={{
-            x: ['-20%', '60%', '-20%'],
-            y: ['10%', '30%', '10%'],
+            x: ['-10%', '40%', '-10%'],
+            y: ['20%', '40%', '20%'],
           }}
           transition={{
-            duration: 15,
+            duration: 25,
             repeat: Infinity,
-            ease: "easeInOut"
-          }}
-        />
-        
-        <motion.div
-          className="absolute w-[400px] h-[400px] rounded-full bg-gradient-to-r from-blue-600/20 to-fuchsia-500/20 blur-[100px]"
-          animate={{
-            x: ['60%', '10%', '60%'],
-            y: ['60%', '20%', '60%'],
-          }}
-          transition={{
-            duration: 18,
-            repeat: Infinity,
-            ease: "easeInOut"
+            ease: "linear",
+            repeatType: "mirror"
           }}
         />
       </div>
       
-      {/* Subtle noise texture */}
+      {/* Subtle noise texture - precomputed for better performance */}
       <div 
-        className="absolute inset-0 opacity-20 mix-blend-overlay"
-        style={{
-          backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 200 200\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noiseFilter\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.65\' numOctaves=\'3\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noiseFilter)\'/%3E%3C/svg%3E")',
-        }}
+        className="absolute inset-0 opacity-20 mix-blend-overlay bg-noise"
       />
     </div>
   );

@@ -23,17 +23,18 @@ export function BackgroundEffects({ className }: BackgroundEffectsProps) {
         style={{ backgroundImage: 'url(/patterns/exotic-pattern.png)', backgroundSize: 'cover' }}
       />
       
-      {/* Abstract shapes */}
+      {/* Single abstract shape with optimized animation */}
       <motion.div 
-        className="absolute -top-[10%] -left-[10%] w-[50%] h-[50%] rounded-full bg-fuchsia-600/30 blur-[140px]"
+        className="absolute -top-[10%] -left-[10%] w-[60%] h-[60%] rounded-full bg-fuchsia-600/20 blur-[140px]"
         animate={{
           x: [0, 50, 0],
           y: [0, 25, 0],
         }}
         transition={{
-          duration: 20,
+          duration: 30,
           repeat: Infinity,
-          ease: "easeInOut"
+          ease: "linear",
+          repeatType: "mirror"
         }}
       />
       
@@ -76,9 +77,9 @@ export function BackgroundEffects({ className }: BackgroundEffectsProps) {
         }}
       />
       
-      {/* Sparkles */}
+      {/* Reduced sparkles */}
       <div className="absolute inset-0">
-        {Array.from({ length: 30 }).map((_, i) => (
+        {Array.from({ length: 10 }).map((_, i) => (
           <motion.div
             key={i}
             className="absolute w-[2px] h-[2px] bg-white rounded-full"
@@ -89,12 +90,11 @@ export function BackgroundEffects({ className }: BackgroundEffectsProps) {
             }}
             animate={{
               opacity: [0.2, 0.8, 0.2],
-              scale: [1, 1.5, 1],
             }}
             transition={{
-              duration: Math.random() * 3 + 2,
+              duration: Math.random() * 4 + 3,
               repeat: Infinity,
-              delay: Math.random() * 5,
+              repeatType: "mirror"
             }}
           />
         ))}

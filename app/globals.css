@@ -296,3 +296,23 @@ section {
     transform: rotate(10deg) scale(1.1);
   }
 }
+
+/* Precomputed noise background for better performance */
+.bg-noise {
+  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAMAAAAp4XiDAAAAUVBMVEWFhYWDg4N3d3dtbW17e3t1dXWBgYGHh4d5eXlzc3OLi4ubm5uVlZWPj4+NjY19fX2JiYl/f39ra2uRkZGZmZlpaWmXl5dvb29xcXGTk5NnZ2c4zIKwAAAAZklEQVR4Ae3RsRGDMBBEQUYC5Jxzdv9tYXkHxAMr2G37BXyW0h5nHBFCCCG/Ifsr86Gc7wnNJtQK8QGinXnJIOMT1c7EjrwcRKoIjrS6CJkigHs58EQQANtBSKGDNtBSp1RCCCFEb9yZFb5bXrxKAAAAAElFTkSuQmCC");
+  background-repeat: repeat;
+}
+
+/* Animation optimizations */
+@media (prefers-reduced-motion: reduce) {
+  .motion-reduce {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}

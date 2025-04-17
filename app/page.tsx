@@ -18,34 +18,41 @@ import { Footer } from "@/components/sections/Footer";
 import ExoticBackground from "@/app/components/ExoticBackground";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import dynamic from "next/dynamic";
+
+// Dynamic import for icons - will only load when Skills section is rendered
+const IconsComponent = dynamic(() => import('@/components/IconsComponent'), {
+  loading: () => <div className="text-center text-white">Loading skills...</div>,
+  ssr: false
+});
 
 export default function Home() {
   // Array de habilidades actuales con sus respectivos iconos
   const currentSkills = [
-    { name: "REACT", icon: SiReact, color: "bg-cyan-500" },
-    { name: "REACT NATIVE", icon: SiReact, color: "bg-blue-500" },
-    { name: "JAVASCRIPT", icon: SiJavascript, color: "bg-yellow-400" },
-    { name: "HTML", icon: SiHtml5, color: "bg-red-500" },
-    { name: "CSS", icon: SiCss3, color: "bg-blue-600" },
-    { name: "NODE.JS", icon: SiNodedotjs, color: "bg-green-600" },
-    { name: "SQLITE", icon: SiSqlite, color: "bg-blue-800" },
-    { name: "MONGODB", icon: SiMongodb, color: "bg-green-500" },
-    { name: "CHAKRA-UI", icon: SiChakraui, color: "bg-teal-500" },
-    { name: "EXPRESS", icon: SiExpress, color: "bg-gray-800" },
-    { name: "GIT", icon: SiGit, color: "bg-red-600" },
-    { name: "POSTMAN", icon: SiPostman, color: "bg-orange-500" },
-    { name: "SPRING BOOT", icon: SiSpring, color: "bg-green-700" },
-    { name: "MYSQL", icon: SiMysql, color: "bg-blue-700" },
-    { name: "ANGULAR JS", icon: SiAngular, color: "bg-red-500" },
-    { name: "JAVA", icon: FaJava, color: "bg-orange-600" }
+    { name: "REACT", iconName: "SiReact", color: "bg-cyan-500" },
+    { name: "REACT NATIVE", iconName: "SiReact", color: "bg-blue-500" },
+    { name: "JAVASCRIPT", iconName: "SiJavascript", color: "bg-yellow-400" },
+    { name: "HTML", iconName: "SiHtml5", color: "bg-red-500" },
+    { name: "CSS", iconName: "SiCss3", color: "bg-blue-600" },
+    { name: "NODE.JS", iconName: "SiNodedotjs", color: "bg-green-600" },
+    { name: "SQLITE", iconName: "SiSqlite", color: "bg-blue-800" },
+    { name: "MONGODB", iconName: "SiMongodb", color: "bg-green-500" },
+    { name: "CHAKRA-UI", iconName: "SiChakraui", color: "bg-teal-500" },
+    { name: "EXPRESS", iconName: "SiExpress", color: "bg-gray-800" },
+    { name: "GIT", iconName: "SiGit", color: "bg-red-600" },
+    { name: "POSTMAN", iconName: "SiPostman", color: "bg-orange-500" },
+    { name: "SPRING BOOT", iconName: "SiSpring", color: "bg-green-700" },
+    { name: "MYSQL", iconName: "SiMysql", color: "bg-blue-700" },
+    { name: "ANGULAR JS", iconName: "SiAngular", color: "bg-red-500" },
+    { name: "JAVA", iconName: "FaJava", color: "bg-orange-600" }
   ];
 
   // Array de otras habilidades
   const otherSkills = [
-    { name: "ENGLISH", icon: IoLanguage, color: "bg-blue-600" },
-    { name: "SPANISH", icon: IoLanguage, color: "bg-yellow-500" },
-    { name: "DOCKER", icon: SiDocker, color: "bg-blue-500" },
-    { name: "CI/CD", icon: SiJenkins, color: "bg-green-500" }
+    { name: "ENGLISH", iconName: "IoLanguage", color: "bg-blue-600" },
+    { name: "SPANISH", iconName: "IoLanguage", color: "bg-yellow-500" },
+    { name: "DOCKER", iconName: "SiDocker", color: "bg-blue-500" },
+    { name: "CI/CD", iconName: "SiJenkins", color: "bg-green-500" }
   ];
 
   return (
@@ -141,41 +148,11 @@ export default function Home() {
               </div>
             </div>
 
-            {/* USING NOW SKILLS */}
-            <div className="mb-10">
-              <h3 className="text-center font-medium text-sm tracking-widest mb-6 text-white">USING NOW:</h3>
-              <div className="grid grid-cols-4 gap-6 max-w-md mx-auto">
-                {currentSkills.map((skill, index) => {
-                  const IconComponent = skill.icon;
-                  return (
-                    <div key={index} className="flex flex-col items-center">
-                      <div className={`w-12 h-12 flex items-center justify-center ${skill.color} rounded-full mb-2 skill-bubble`}>
-                        <IconComponent className="text-white text-xl" />
-                      </div>
-                      <span className="text-xs text-white">{skill.name}</span>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-
-            {/* OTHER SKILLS */}
-            <div className="mb-10">
-              <h3 className="text-center font-medium text-sm tracking-widest mb-6 text-white">OTHER SKILLS:</h3>
-              <div className="grid grid-cols-4 gap-6 max-w-md mx-auto">
-                {otherSkills.map((skill, index) => {
-                  const IconComponent = skill.icon;
-                  return (
-                    <div key={index} className="flex flex-col items-center">
-                      <div className={`w-12 h-12 flex items-center justify-center ${skill.color} rounded-full mb-2 skill-bubble`}>
-                        <IconComponent className="text-white text-xl" />
-                      </div>
-                      <span className="text-xs text-white">{skill.name}</span>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
+            {/* Render IconsComponent with skill data */}
+            <IconsComponent 
+              currentSkills={currentSkills} 
+              otherSkills={otherSkills} 
+            />
           </div>
         </section>
 
@@ -213,7 +190,7 @@ export default function Home() {
                 className="glass-button px-8"
                 asChild
               >
-                <Link href="/portfolio">VIEW PORTFOLIO</Link>
+                <Link href="#portfolio">VIEW PORTFOLIO</Link>
               </Button>
             </div>
           </div>

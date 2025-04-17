@@ -1,14 +1,10 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
 import { Navigation } from "@/components/Navigation";
 import { motion } from "framer-motion";
 
 export function ProfileSection() {
-  const [isImageError, setIsImageError] = useState(false);
-  const [isLoaded, setIsLoaded] = useState(false);
-
   return (
     <div className="w-full md:w-1/2 bg-transparent p-8 md:p-12 lg:p-16 flex flex-col relative z-10">
       {/* Navigation */}
@@ -30,28 +26,14 @@ export function ProfileSection() {
           <div className="absolute inset-0 border border-primary/30 rounded-2xl z-20"></div>
           
           {/* Image */}
-          {isImageError ? (
-            <div className="w-full h-full flex items-center justify-center bg-gray-800">
-              <p className="text-white">Image not available</p>
-            </div>
-          ) : (
-            <>
-              <img
-                src="https://res.cloudinary.com/dhmw3jd5q/image/upload/v1744902248/yo-blanco-1x1_ktxatq.jpg"
-                alt="Profile"
-                className={`w-full h-full object-cover object-center transition-opacity duration-700 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
-                onError={() => setIsImageError(true)}
-                onLoad={() => setIsLoaded(true)}
-              />
-              
-              {/* Loading overlay */}
-              {!isLoaded && (
-                <div className="absolute inset-0 flex items-center justify-center bg-gray-800">
-                  <div className="w-8 h-8 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                </div>
-              )}
-            </>
-          )}
+          <Image
+            src="https://res.cloudinary.com/dhmw3jd5q/image/upload/v1744902248/yo-blanco-1x1_ktxatq.jpg"
+            alt="Profile"
+            className="w-full h-full object-cover object-center"
+            fill
+            sizes="(max-width: 768px) 100vw, 300px"
+            priority
+          />
           
           {/* Decorative corner accents */}
           <div className="absolute top-0 right-0 w-20 h-20 z-20">

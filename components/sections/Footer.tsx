@@ -28,7 +28,7 @@ export function Footer() {
       
       <div className="text-center max-w-5xl mx-auto px-6">
         <div className="flex justify-center gap-6 mb-6">
-          <Link href="https://www.facebook.com/matias.alzugaray" target="_blank" rel="noopener noreferrer" className="text-white hover:text-primary transition-colors">
+          <Link href="https://www.linkedin.com/in/matias-alzugaray-piven-29863a213/" target="_blank" rel="noopener noreferrer" className="text-white hover:text-primary transition-colors">
             <FaLinkedin size={16} />
             <span className="sr-only">LinkedIn</span>
           </Link>
@@ -36,7 +36,7 @@ export function Footer() {
             <FaGithub size={16} />
             <span className="sr-only">GitHub</span>
           </Link>
-          <Link href="https://www.instagram.com/alzugaraymatias" target="_blank" rel="noopener noreferrer" className="text-white hover:text-primary transition-colors">
+          <Link href="https://www.instagram.com/matias_alzugaray/" target="_blank" rel="noopener noreferrer" className="text-white hover:text-primary transition-colors">
             <FaInstagram size={16} />
             <span className="sr-only">Instagram</span>
           </Link>

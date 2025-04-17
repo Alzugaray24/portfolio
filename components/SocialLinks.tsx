@@ -25,7 +25,7 @@ export function SocialLinks() {
         <span className="sr-only">GitHub</span>
       </Link>
       <Link 
-        href="https://www.linkedin.com/in/matias-alzugaray/" 
+        href="https://www.linkedin.com/in/matias-alzugaray-piven-29863a213/" 
         target="_blank" rel="noopener noreferrer" 
         className="bg-black/30 border border-white/10 text-white p-3 rounded-full hover:bg-primary/20 hover:border-primary/30 transition-all" 
         aria-label="LinkedIn"

@@ -55,7 +55,7 @@ export function AboutSection() {
             className="glass-button"
             asChild
           >
-            <Link href="/contact">Let's work together</Link>
+            <Link href="#contact">Let's work together</Link>
           </Button>
           <Button 
             className="glass-button-secondary"
