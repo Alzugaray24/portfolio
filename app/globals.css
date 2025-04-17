@@ -1,0 +1,298 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 20, 20, 30;
+    --background-end-rgb: 10, 10, 20;
+
+    --background: 240 30% 4%;
+    --foreground: 0 0% 98%;
+
+    --card: 240 25% 8%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 240 25% 8%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 263 70% 50%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 240 20% 12%;
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 240 20% 12%;
+    --muted-foreground: 215 20% 75%;
+
+    --accent: 263 65% 55%;
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 240 25% 15%;
+    --input: 240 25% 15%;
+    --ring: 263 70% 50%;
+
+    --radius: 0.5rem;
+  }
+
+  /* Para modo claro - lo mantenemos definido pero usaremos principalmente dark */
+  .light {
+    --foreground-rgb: 20, 20, 30;
+    --background-start-rgb: 255, 255, 255;
+    --background-end-rgb: 240, 240, 250;
+
+    --background: 0 0% 100%;
+    --foreground: 240 10% 10%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 10%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 10%;
+
+    --primary: 263 70% 50%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 240 10% 95%;
+    --secondary-foreground: 240 10% 10%;
+
+    --muted: 240 10% 95%;
+    --muted-foreground: 240 10% 40%;
+
+    --accent: 263 70% 50%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 240 10% 85%;
+    --input: 240 10% 85%;
+    --ring: 263 70% 50%;
+  }
+
+  .dark {
+    --background: 0 0% 3.9%;
+    --foreground: 0 0% 98%;
+
+    --card: 0 0% 3.9%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 0 0% 3.9%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 0 0% 98%;
+    --primary-foreground: 0 0% 9%;
+
+    --secondary: 0 0% 14.9%;
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 0 0% 14.9%;
+    --muted-foreground: 0 0% 63.9%;
+
+    --accent: 0 0% 14.9%;
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 0 0% 14.9%;
+    --input: 0 0% 14.9%;
+    --ring: 0 0% 83.1%;
+  }
+
+  /* Dark mode - you can uncomment if needed
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --foreground-rgb: 255, 255, 255;
+      --background-start-rgb: 0, 0, 0;
+      --background-end-rgb: 0, 0, 0;
+    }
+  } */
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    color: rgb(var(--foreground-rgb));
+    background: linear-gradient(
+      to bottom,
+      rgb(var(--background-start-rgb)),
+      rgb(var(--background-end-rgb))
+    );
+    min-height: 100vh;
+  }
+}
+
+/* SVG icon with highlight effect */
+.svg-icon {
+  transition: all 0.3s ease;
+}
+
+.svg-icon:hover {
+  transform: translateY(-5px);
+  filter: drop-shadow(0 0 8px rgba(100, 60, 200, 0.5));
+}
+
+/* Smooth transitions for all interactive elements */
+button,
+a {
+  transition: all 0.3s ease-in-out;
+}
+
+/* Add a smooth animation for section transitions */
+section {
+  transition: opacity 0.5s ease-in-out;
+}
+
+/* Highlight for active navigation items */
+.nav-link.active {
+  font-weight: bold;
+  color: rgb(var(--accent-foreground-rgb));
+}
+
+/* Subtle animation for skill bubbles */
+.skill-bubble {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.skill-bubble:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 20px rgba(100, 60, 200, 0.3);
+}
+
+/* Componentes customizados para la UI global */
+.glass-card {
+  @apply bg-black/30 backdrop-blur-sm border border-white/10 
+         rounded-2xl shadow-xl transition-all duration-300;
+}
+
+.glass-card:hover {
+  @apply transform scale-[1.02] shadow-2xl border-white/20;
+}
+
+.glass-button {
+  @apply bg-primary/80 text-white hover:bg-primary 
+         backdrop-blur-sm transition-all duration-300 
+         px-6 py-2 rounded-full shadow-md 
+         hover:shadow-lg hover:shadow-primary/30;
+}
+
+.glass-button-secondary {
+  @apply bg-transparent border border-white/30 text-white 
+         hover:bg-white/10 backdrop-blur-sm transition-all 
+         duration-300 px-6 py-2 rounded-full;
+}
+
+.section-heading {
+  @apply text-4xl md:text-5xl font-bold mb-8 text-white;
+  background: linear-gradient(90deg, #f1f1f1, #ffffff, #f1f1f1);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.15);
+}
+
+.section-subheading {
+  @apply text-xl font-medium mb-6 text-white/90;
+}
+
+/* Mantener estilos de portfolio existentes para consistencia */
+.portfolio-bg {
+  background: linear-gradient(
+      217deg,
+      rgba(106, 17, 203, 0.1),
+      rgba(106, 17, 203, 0) 70.71%
+    ),
+    linear-gradient(
+      127deg,
+      rgba(37, 117, 252, 0.1),
+      rgba(37, 117, 252, 0) 70.71%
+    ),
+    linear-gradient(
+      336deg,
+      rgba(106, 17, 203, 0.1),
+      rgba(106, 17, 203, 0) 70.71%
+    ),
+    repeating-linear-gradient(
+      45deg,
+      rgba(255, 255, 255, 0.05) 0px,
+      rgba(255, 255, 255, 0.05) 2px,
+      transparent 2px,
+      transparent 4px
+    ),
+    conic-gradient(
+      from 0deg at 50% 50%,
+      #1a1a1a 0%,
+      #383838 25%,
+      #1a1a1a 50%,
+      #383838 75%,
+      #1a1a1a 100%
+    );
+  position: relative;
+  overflow: hidden;
+  animation: slowSpin 120s linear infinite;
+}
+
+.portfolio-bg::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background-image: radial-gradient(
+      circle at 30% 40%,
+      rgba(106, 17, 203, 0.08) 0%,
+      transparent 8%
+    ),
+    radial-gradient(
+      circle at 70% 60%,
+      rgba(37, 117, 252, 0.08) 0%,
+      transparent 12%
+    );
+  opacity: 0.4;
+  z-index: 0;
+  animation: floatDots 30s ease-in-out infinite alternate;
+}
+
+.portfolio-content {
+  position: relative;
+  z-index: 1;
+}
+
+.portfolio-card {
+  @apply glass-card;
+}
+
+.portfolio-heading {
+  @apply section-heading;
+}
+
+@keyframes slowSpin {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 100% 100%;
+  }
+}
+
+@keyframes floatDots {
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+  100% {
+    transform: rotate(10deg) scale(1.1);
+  }
+}
