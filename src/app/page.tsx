@@ -100,7 +100,7 @@ export default function Home() {
                 asChild
               >
                 <Link 
-                  href="https://asset.cloudinary.com/dhmw3jd5q/8bb88115bd14ecc881b5e8c370859f44" 
+                  href="https://res.cloudinary.com/dhmw3jd5q/image/upload/v1744922926/Matias_Alzugaray_CV.pdf" 
                   target="_blank" 
                   rel="noopener noreferrer" 
                   download="Matias_Alzugaray_CV.pdf"
