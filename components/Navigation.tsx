@@ -71,7 +71,6 @@ export function Navigation() {
           {/* Logo */}
           <Link href="#home" className="flex items-center gap-2 z-50 relative">
             <Logo />
-            <span className="text-white font-semibold text-lg hidden md:block">Matias Alzugaray</span>
           </Link>
           
           {/* Desktop Navigation */}
