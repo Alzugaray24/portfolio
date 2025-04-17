@@ -19,7 +19,7 @@ export function AboutSection() {
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 text-white section-heading">Matias Alzugaray</h1>
           <p className="text-primary/90 text-lg mb-4">Full-Stack Developer</p>
           <p className="text-gray-300 text-sm mb-6 max-w-md leading-relaxed">
-            Passionate about creating modern web applications with exceptional user experiences using React, Node.js and other cutting-edge technologies.
+            Dedicated to crafting sophisticated digital solutions with a focus on user-centric design, scalable architecture, and optimal performance across the full development stack.
           </p>
         </motion.div>
 

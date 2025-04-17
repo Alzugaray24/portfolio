@@ -20,6 +20,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import dynamic from "next/dynamic";
 import { Navigation } from "@/components/Navigation";
+import { CertificatesSection } from "@/components/sections/CertificatesSection";
 
 // Dynamic import for icons - will only load when Skills section is rendered
 const IconsComponent = dynamic(() => import('@/components/IconsComponent'), {
@@ -85,7 +86,7 @@ export default function Home() {
             {/* INTRO TEXT */}
             <div className="mb-12">
               <p className="text-center text-sm text-gray-300 max-w-xl mx-auto">
-                I'm a 26-year-old advanced student of Computer Science with a strong foundation in full-stack development. 
+                I'm a 27-year-old advanced student of Computer Science with a strong foundation in full-stack development. 
                 With over 2 years of professional experience, I specialize in creating elegant and functional web solutions
                 that stand out for their design and performance. I'm constantly learning new technologies and adapting quickly
                 to project requirements, delivering efficient and high-quality solutions.
@@ -160,7 +161,20 @@ export default function Home() {
           </div>
         </section>
 
+        {/* Certificates Section */}
+        <section id="certificates" className="py-20 relative z-10">
+          <div className="max-w-3xl mx-auto px-4">
+            <div className="flex justify-center mb-8">
+              <div className="glass-card px-10 py-2">
+                <h2 className="text-center text-sm tracking-widest font-medium text-white">CERTIFICATES</h2>
+              </div>
+            </div>
+            <CertificatesSection />
+          </div>
+        </section>
+
         {/* Portfolio Section */}
+        {/* 
         <section id="portfolio" className="py-20 relative z-10">
           <div className="max-w-5xl mx-auto px-6">
             <div className="flex justify-center mb-12">
@@ -199,6 +213,7 @@ export default function Home() {
             </div>
           </div>
         </section>
+        */}
 
         {/* Contact Section */}
         <section id="contact" className="py-20 relative z-10">

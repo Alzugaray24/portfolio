@@ -41,4 +41,19 @@ next-env.d.ts
 
 # IDE files
 .idea/
-.fleet/ 
+.fleet/
+
+# environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# IDE files
+.idea
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json 

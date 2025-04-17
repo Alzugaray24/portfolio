@@ -8,9 +8,9 @@ import Link from "next/link";
 
 export function ProfileSection() {
   return (
-    <div className="w-full md:w-1/2 bg-transparent p-8 pt-24 md:p-12 md:pt-28 lg:p-16 lg:pt-32 flex flex-col relative z-10 min-h-screen md:min-h-0">
+    <div className="w-full md:w-1/2 bg-transparent p-8 md:p-12 lg:p-16 flex flex-col justify-center relative z-10 min-h-screen md:min-h-screen">
       {/* Profile image container - Hidden on mobile */}
-      <div className="hidden md:flex flex-grow items-center justify-center">
+      <div className="hidden md:flex items-center justify-center">
         <motion.div 
           className="relative w-[300px] h-[400px] rounded-2xl overflow-hidden glass-card shadow-[0_0_30px_rgba(106,17,203,0.2)] transition-all duration-500"
           initial={{ opacity: 0, y: 20 }}
