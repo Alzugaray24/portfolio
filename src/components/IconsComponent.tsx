@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   SiHtml5, SiCss3, SiSass, SiJavascript, SiReact, SiBootstrap, 
   SiGit, SiFigma, SiSpring, SiNextdotjs, SiAngular,
@@ -6,11 +6,12 @@ import {
   SiDocker, SiJenkins, SiExpress, SiChakraui, SiSqlite,
   SiPostman
 } from "react-icons/si";
-import { FaJava, FaPhone, FaEnvelope, FaMapMarkerAlt, FaPaintBrush, FaLaptopCode, FaWrench } from "react-icons/fa";
+import { FaJava, FaPhone, FaEnvelope, FaMapMarkerAlt, FaPaintBrush, FaLaptopCode, FaWrench, FaChevronDown } from "react-icons/fa";
 import { IoLanguage } from "react-icons/io5";
 import { IconType } from 'react-icons';
 import { motion, AnimatePresence } from 'framer-motion';
 import { createPortal } from 'react-dom';
+import { Button } from '@/components/ui/button';
 
 // Map of icon names to icon components
 const iconMap: Record<string, IconType> = {
@@ -19,7 +20,7 @@ const iconMap: Record<string, IconType> = {
   SiNodedotjs, SiMysql, SiMongodb, SiTypescript,
   SiDocker, SiJenkins, SiExpress, SiChakraui, SiSqlite,
   SiPostman,
-  FaJava, FaPhone, FaEnvelope, FaMapMarkerAlt, FaPaintBrush, FaLaptopCode, FaWrench,
+  FaJava, FaPhone, FaEnvelope, FaMapMarkerAlt, FaPaintBrush, FaLaptopCode, FaWrench, FaChevronDown,
   IoLanguage
 };
 
@@ -97,7 +98,7 @@ const SkillPopup = ({ skill, position, onClose }: { skill: string, position: { x
       }}
     >
       <motion.div 
-        className="bg-black/80 backdrop-blur-sm p-3 rounded-lg shadow-xl w-[220px] text-left"
+        className="glass-card p-3 rounded-lg shadow-xl w-[220px] text-left border border-white/10 bg-white/[0.03] backdrop-blur-lg"
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: -10 }}
@@ -109,7 +110,7 @@ const SkillPopup = ({ skill, position, onClose }: { skill: string, position: { x
             <span className="text-xs text-primary font-medium">Proficiency</span>
             <span className="text-xs text-white">{skillDetails[skill]?.level || 80}%</span>
           </div>
-          <div className="w-full bg-gray-700 rounded-full h-1.5">
+          <div className="w-full bg-gray-700/50 rounded-full h-1.5">
             <div 
               className="bg-primary h-1.5 rounded-full" 
               style={{ width: `${skillDetails[skill]?.level || 80}%` }}
@@ -127,6 +128,19 @@ const IconsComponent: React.FC<IconsComponentProps> = ({ currentSkills, otherSki
   const [selectedCategory, setSelectedCategory] = useState<SkillCategory>('all');
   const [hoveredSkill, setHoveredSkill] = useState<string | null>(null);
   const [popupPosition, setPopupPosition] = useState({ x: 0, y: 0 });
+  const [showAllMobile, setShowAllMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  
+  // Check if we're on mobile on client-side only
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
   
   const allSkills = [...currentSkills, ...otherSkills];
   
@@ -134,6 +148,11 @@ const IconsComponent: React.FC<IconsComponentProps> = ({ currentSkills, otherSki
   const filteredSkills = selectedCategory === 'all' 
     ? allSkills 
     : allSkills.filter(skill => skillCategories[skill.name] === selectedCategory);
+
+  // For mobile, limit to 6 skills initially unless expanded
+  const displayedSkills = !showAllMobile && isMobile 
+    ? filteredSkills.slice(0, 6) 
+    : filteredSkills;
 
   // Render an icon based on its name
   const renderIcon = (iconName: string) => {
@@ -153,25 +172,34 @@ const IconsComponent: React.FC<IconsComponentProps> = ({ currentSkills, otherSki
 
   // Handle mouse hover events
   const handleSkillHover = (skill: string, e: React.MouseEvent) => {
-    setHoveredSkill(skill);
-    setPopupPosition({ 
-      x: e.clientX, 
-      y: e.clientY 
-    });
+    // Only show popup on desktop
+    if (!isMobile) {
+      setHoveredSkill(skill);
+      setPopupPosition({ 
+        x: e.clientX, 
+        y: e.clientY 
+      });
+    }
   };
 
   return (
-    <div className="glass-card p-6 relative">
-      {/* Filter tabs */}
-      <div className="flex justify-center mb-8 flex-wrap gap-2">
+    <div className="glass-card p-8 relative border border-white/5 bg-white/[0.03] backdrop-blur-lg rounded-xl">
+      {/* Decorative accent elements - enhance the glass card appearance */}
+      <div className="absolute -inset-0.5 bg-gradient-to-r from-primary/10 via-purple-500/5 to-blue-500/10 rounded-xl blur-xl opacity-70 -z-10"></div>
+      
+      {/* Filter tabs - scrollable on mobile */}
+      <div className="flex justify-start md:justify-center mb-8 overflow-x-auto pb-2 md:pb-0 md:flex-wrap gap-2 md:gap-3 no-scrollbar">
         {categories.map(category => (
           <button
             key={category.id}
-            onClick={() => setSelectedCategory(category.id as SkillCategory)}
-            className={`px-4 py-2 text-xs font-medium rounded-full transition-all ${
+            onClick={() => {
+              setSelectedCategory(category.id as SkillCategory);
+              setShowAllMobile(false); // Reset expand state when changing category
+            }}
+            className={`px-4 py-2 text-xs font-medium rounded-full transition-all flex-shrink-0 ${
               selectedCategory === category.id 
                 ? 'bg-primary text-white' 
-                : 'bg-black/20 text-gray-300 hover:bg-black/30'
+                : 'glass-button-secondary text-gray-300 hover:bg-white/10'
             }`}
           >
             {category.label}
@@ -181,7 +209,7 @@ const IconsComponent: React.FC<IconsComponentProps> = ({ currentSkills, otherSki
       
       {/* Skills grid */}
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
-        {filteredSkills.map((skill, index) => (
+        {displayedSkills.map((skill, index) => (
           <motion.div
             key={index}
             className="flex flex-col items-center"
@@ -192,13 +220,27 @@ const IconsComponent: React.FC<IconsComponentProps> = ({ currentSkills, otherSki
             onMouseEnter={(e) => handleSkillHover(skill.name, e)}
             onMouseLeave={() => setHoveredSkill(null)}
           >
-            <div className={`w-16 h-16 flex items-center justify-center ${skill.color} rounded-full mb-3 shadow-lg`}>
+            <div className={`w-16 h-16 flex items-center justify-center ${skill.color} rounded-full mb-3 shadow-lg relative overflow-hidden`}>
+              <div className="absolute inset-0 bg-gradient-to-b from-white/20 to-transparent"></div>
               {renderIcon(skill.iconName)}
             </div>
             <span className="text-xs font-medium text-white">{skill.name}</span>
           </motion.div>
         ))}
       </div>
+      
+      {/* Show More button - Only on mobile when there are more skills to show */}
+      {isMobile && filteredSkills.length > 6 && !showAllMobile && (
+        <div className="flex justify-center mt-8">
+          <Button 
+            onClick={() => setShowAllMobile(true)} 
+            className="glass-button w-full max-w-xs text-white px-6 py-2 rounded-full text-sm flex items-center justify-center gap-2"
+          >
+            Show All Skills
+            <FaChevronDown className="text-xs" />
+          </Button>
+        </div>
+      )}
       
       {/* Render popup via portal */}
       <AnimatePresence>

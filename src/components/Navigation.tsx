@@ -67,7 +67,7 @@ export function Navigation() {
           scrolled ? 'py-2 bg-black/60 backdrop-blur-md' : 'py-4 bg-black/20 backdrop-blur-sm'
         }`}
       >
-        <div className="container mx-auto px-4 md:px-6 flex items-center justify-between">
+        <div className="mx-auto px-4 md:px-6 flex items-center justify-between max-w-[1180px]">
           {/* Logo */}
           <Link href="#home" className="flex items-center gap-2 z-50 relative">
             <Logo />
@@ -152,7 +152,7 @@ export function Navigation() {
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.3 }}
             >
-              <div className="container mx-auto px-4 py-8 flex flex-col items-center gap-8">
+              <div className="mx-auto px-4 py-8 flex flex-col items-center gap-8 max-w-[1180px]">
                 <div className="flex flex-col items-center gap-8 w-full">
                   <Link 
                     href="#about" 

@@ -76,9 +76,9 @@ export function CertificatesSection() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto px-4">
+    <div className="w-full max-w-[1180px] mx-auto px-4">
       {/* Certificate Carousel */}
-      <div className="relative">
+      <div className="relative w-full">
         {/* Navigation Buttons */}
         <div className="absolute inset-y-0 left-0 z-10 flex items-center">
           <Button 
@@ -112,7 +112,7 @@ export function CertificatesSection() {
             exit={{ opacity: 0, scale: 0.9 }}
             transition={{ duration: 0.3 }}
           >
-            <div className="glass-card p-4 max-w-2xl mx-auto w-full">
+            <div className="glass-card p-4 max-w-3xl mx-auto w-full">
               <div className="relative aspect-[4/3] w-full overflow-hidden rounded-lg mb-4">
                 {certificates[currentIndex].isPdf ? (
                   <iframe

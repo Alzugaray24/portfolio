@@ -12,33 +12,33 @@
     --background-start-rgb: 20, 20, 30;
     --background-end-rgb: 10, 10, 20;
 
-    --background: 240 30% 4%;
-    --foreground: 0 0% 98%;
+    --background: 0 0% 3%;
+    --foreground: 213 31% 91%;
 
-    --card: 240 25% 8%;
-    --card-foreground: 0 0% 98%;
+    --card: 0 0% 3%;
+    --card-foreground: 213 31% 91%;
 
-    --popover: 240 25% 8%;
-    --popover-foreground: 0 0% 98%;
+    --popover: 0 0% 3%;
+    --popover-foreground: 213 31% 91%;
 
-    --primary: 263 70% 50%;
-    --primary-foreground: 0 0% 100%;
+    --primary: 288 59.5% 43.1%;
+    --primary-foreground: 210 40% 98%;
 
-    --secondary: 240 20% 12%;
-    --secondary-foreground: 0 0% 98%;
+    --secondary: 240 5.9% 10%;
+    --secondary-foreground: 210 40% 98%;
 
-    --muted: 240 20% 12%;
-    --muted-foreground: 215 20% 75%;
+    --muted: 230 73% 7%;
+    --muted-foreground: 215 16% 47%;
 
-    --accent: 263 65% 55%;
-    --accent-foreground: 0 0% 98%;
+    --accent: 288 59.5% 43.1%;
+    --accent-foreground: 210 40% 98%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
 
-    --border: 240 25% 15%;
-    --input: 240 25% 15%;
-    --ring: 263 70% 50%;
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 288 59.5% 43.1%;
 
     --radius: 0.5rem;
   }
@@ -173,8 +173,7 @@ section {
 
 /* Componentes customizados para la UI global */
 .glass-card {
-  @apply bg-black/30 backdrop-blur-sm border border-white/10 
-         rounded-2xl shadow-xl transition-all duration-300;
+  @apply bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg shadow-lg;
 }
 
 .glass-card:hover {
@@ -182,16 +181,11 @@ section {
 }
 
 .glass-button {
-  @apply bg-primary/80 text-white hover:bg-primary 
-         backdrop-blur-sm transition-all duration-300 
-         px-6 py-2 rounded-full shadow-md 
-         hover:shadow-lg hover:shadow-primary/30;
+  @apply bg-primary/20 hover:bg-primary/30 text-white border border-primary/30 transition-all duration-300 shadow-[0_0_15px_rgba(106,17,203,0.3)] hover:shadow-[0_0_20px_rgba(106,17,203,0.5)];
 }
 
 .glass-button-secondary {
-  @apply bg-transparent border border-white/30 text-white 
-         hover:bg-white/10 backdrop-blur-sm transition-all 
-         duration-300 px-6 py-2 rounded-full;
+  @apply bg-black/40 hover:bg-black/60 text-white border border-white/10 transition-all duration-300;
 }
 
 .section-heading {
@@ -299,7 +293,7 @@ section {
 
 /* Precomputed noise background for better performance */
 .bg-noise {
-  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAMAAAAp4XiDAAAAUVBMVEWFhYWDg4N3d3dtbW17e3t1dXWBgYGHh4d5eXlzc3OLi4ubm5uVlZWPj4+NjY19fX2JiYl/f39ra2uRkZGZmZlpaWmXl5dvb29xcXGTk5NnZ2c4zIKwAAAAZklEQVR4Ae3RsRGDMBBEQUYC5Jxzdv9tYXkHxAMr2G37BXyW0h5nHBFCCCG/Ifsr86Gc7wnNJtQK8QGinXnJIOMT1c7EjrwcRKoIjrS6CJkigHs58EQQANtBSKGDNtBSp1RCCCFEb9yZFb5bXrxKAAAAAElFTkSuQmCC");
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
   background-repeat: repeat;
 }
 
@@ -315,4 +309,86 @@ section {
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
   }
+}
+
+@layer components {
+  .glass-card {
+    @apply bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg shadow-lg;
+  }
+
+  .glass-button {
+    @apply bg-primary/20 hover:bg-primary/30 text-white border border-primary/30 transition-all duration-300 shadow-[0_0_15px_rgba(106,17,203,0.3)] hover:shadow-[0_0_20px_rgba(106,17,203,0.5)];
+  }
+
+  .glass-button-secondary {
+    @apply bg-black/40 hover:bg-black/60 text-white border border-white/10 transition-all duration-300;
+  }
+}
+
+@layer utilities {
+  /* Noise background */
+  .bg-noise {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  }
+
+  /* Radial gradient for vignette effect */
+  .bg-radial-gradient-subtle {
+    background-image: radial-gradient(
+      circle at center,
+      transparent 0%,
+      rgba(0, 0, 0, 0.2) 80%,
+      rgba(0, 0, 0, 0.5) 100%
+    );
+  }
+
+  /* Gradient text effect */
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary via-purple-500 to-blue-500;
+  }
+
+  /* Animation for sections to fade in */
+  .section-fade-in {
+    @apply opacity-0 translate-y-10 transition-all duration-1000 ease-out;
+  }
+
+  .section-fade-in.appear {
+    @apply opacity-100 translate-y-0;
+  }
+}
+
+/* Custom animations for profile image effects */
+@keyframes pulse-slow {
+  0%,
+  100% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 0.9;
+  }
+}
+
+@keyframes float-slow {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+}
+
+.animation-delay-1000 {
+  animation-delay: 1s;
+}
+
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 5s ease-in-out infinite;
+}
+
+.animate-float-slow {
+  animation: float-slow 8s ease-in-out infinite;
 }
