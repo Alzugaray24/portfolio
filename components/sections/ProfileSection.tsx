@@ -73,7 +73,9 @@ export function ProfileSection() {
           <p className="text-xl text-primary mb-8">I'M A DEVELOPER</p>
           
           {/* Social links */}
-          <SocialLinks className="justify-center mb-8" />
+          <div className="justify-center mb-8">
+            <SocialLinks />
+          </div>
           
           {/* Call to action buttons for mobile */}
           <div className="flex flex-col gap-4 w-full max-w-xs mx-auto">
