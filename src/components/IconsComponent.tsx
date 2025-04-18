@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect, memo, useMemo } from 'react';
 import { 
   SiHtml5, SiCss3, SiSass, SiJavascript, SiReact, SiBootstrap, 
   SiGit, SiFigma, SiSpring, SiNextdotjs, SiAngular,
@@ -12,6 +12,7 @@ import { IconType } from 'react-icons';
 import { motion, AnimatePresence } from 'framer-motion';
 import { createPortal } from 'react-dom';
 import { Button } from '@/components/ui/button';
+import { useReducedMotion } from '@/utils/hooks';
 
 // Map of icon names to icon components
 const iconMap: Record<string, IconType> = {
@@ -86,7 +87,15 @@ const skillCategories: Record<string, SkillCategory> = {
   "SPANISH": 'other'
 };
 
-const SkillPopup = ({ skill, position, onClose }: { skill: string, position: { x: number, y: number }, onClose: () => void }) => {
+interface SkillPopupProps {
+  skill: string;
+  position: { x: number; y: number };
+  onClose: () => void;
+}
+
+const SkillPopup = memo(({ skill, position, onClose }: SkillPopupProps) => {
+  const prefersReducedMotion = useReducedMotion();
+  
   if (typeof document === 'undefined') return null; // SSR check
   
   return createPortal(
@@ -99,10 +108,10 @@ const SkillPopup = ({ skill, position, onClose }: { skill: string, position: { x
     >
       <motion.div 
         className="glass-card p-3 rounded-lg shadow-xl w-[220px] text-left border border-white/10 bg-white/[0.03] backdrop-blur-lg"
-        initial={{ opacity: 0, y: -10 }}
+        initial={{ opacity: 0, y: prefersReducedMotion ? 0 : -10 }}
         animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: -10 }}
-        transition={{ duration: 0.2 }}
+        exit={{ opacity: 0, y: prefersReducedMotion ? 0 : -10 }}
+        transition={{ duration: prefersReducedMotion ? 0.1 : 0.2 }}
         onMouseLeave={onClose}
       >
         <div className="mb-2">
@@ -122,14 +131,17 @@ const SkillPopup = ({ skill, position, onClose }: { skill: string, position: { x
     </div>,
     document.body
   );
-};
+});
 
-const IconsComponent: React.FC<IconsComponentProps> = ({ currentSkills, otherSkills }) => {
+SkillPopup.displayName = 'SkillPopup';
+
+const IconsComponent = memo(({ currentSkills, otherSkills }: IconsComponentProps) => {
   const [selectedCategory, setSelectedCategory] = useState<SkillCategory>('all');
   const [hoveredSkill, setHoveredSkill] = useState<string | null>(null);
   const [popupPosition, setPopupPosition] = useState({ x: 0, y: 0 });
   const [showAllMobile, setShowAllMobile] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const prefersReducedMotion = useReducedMotion();
   
   // Check if we're on mobile on client-side only
   useEffect(() => {
@@ -160,15 +172,15 @@ const IconsComponent: React.FC<IconsComponentProps> = ({ currentSkills, otherSki
     return Icon ? <Icon className="text-white text-xl" /> : null;
   };
 
-  // Categories for filter buttons
-  const categories = [
+  // Categories for filter buttons - memoized to prevent recreation on each render
+  const categories = useMemo(() => [
     { id: 'all', label: 'ALL' },
     { id: 'frontend', label: 'FRONTEND' },
     { id: 'backend', label: 'BACKEND' },
     { id: 'database', label: 'DATABASE' },
     { id: 'devops', label: 'DEVOPS' },
     { id: 'other', label: 'OTHER' }
-  ];
+  ], []);
 
   // Handle mouse hover events
   const handleSkillHover = (skill: string, e: React.MouseEvent) => {
@@ -179,6 +191,26 @@ const IconsComponent: React.FC<IconsComponentProps> = ({ currentSkills, otherSki
         x: e.clientX, 
         y: e.clientY 
       });
+    }
+  };
+
+  // Animation variants respecting reduced motion preference
+  const skillItemVariants = {
+    hidden: { 
+      opacity: 0, 
+      y: prefersReducedMotion ? 0 : 20 
+    },
+    visible: (i: number) => ({ 
+      opacity: 1, 
+      y: 0,
+      transition: { 
+        duration: prefersReducedMotion ? 0.2 : 0.3, 
+        delay: prefersReducedMotion ? 0 : i * 0.05 
+      }
+    }),
+    hover: {
+      scale: prefersReducedMotion ? 1.02 : 1.05,
+      transition: { duration: 0.2 }
     }
   };
 
@@ -213,10 +245,11 @@ const IconsComponent: React.FC<IconsComponentProps> = ({ currentSkills, otherSki
           <motion.div
             key={index}
             className="flex flex-col items-center"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3, delay: index * 0.05 }}
-            whileHover={{ scale: 1.05 }}
+            custom={index}
+            initial="hidden"
+            animate="visible"
+            whileHover="hover"
+            variants={skillItemVariants}
             onMouseEnter={(e) => handleSkillHover(skill.name, e)}
             onMouseLeave={() => setHoveredSkill(null)}
           >
@@ -260,6 +293,8 @@ const IconsComponent: React.FC<IconsComponentProps> = ({ currentSkills, otherSki
       )}
     </div>
   );
-};
+});
+
+IconsComponent.displayName = 'IconsComponent';
 
 export default IconsComponent; 

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { ReactNode } from "react";
+import React, { ReactNode, memo } from "react";
 import { AboutSection } from "@/components/sections/AboutSection";
 import { ProfileSection } from "@/components/sections/ProfileSection";
 import { DiagonalSplit } from "@/components/sections/DiagonalSplit";
@@ -15,13 +15,12 @@ import { FaJava, FaPhone, FaEnvelope, FaMapMarkerAlt, FaPaintBrush, FaLaptopCode
 import { IoLanguage } from "react-icons/io5";
 import { ContactForm } from "@/components/sections/ContactForm";
 import { Footer } from "@/components/sections/Footer";
-import ExoticBackground from "@/app/components/ExoticBackground";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import dynamic from "next/dynamic";
-import { Navigation } from "@/components/Navigation";
 import { CertificatesSection } from "@/components/sections/CertificatesSection";
 import { motion } from "framer-motion";
+import { useReducedMotion } from "@/utils/hooks";
 
 // Dynamic import for icons - will only load when Skills section is rendered
 const IconsComponent = dynamic(() => import('@/components/IconsComponent'), {
@@ -29,8 +28,8 @@ const IconsComponent = dynamic(() => import('@/components/IconsComponent'), {
   ssr: false
 });
 
-// Componente de animación para secciones
-const AnimatedSection = ({ 
+// Animated section component with memo for performance optimization
+const AnimatedSection = memo(({ 
   id, 
   className, 
   children 
@@ -39,19 +38,36 @@ const AnimatedSection = ({
   className: string; 
   children: ReactNode 
 }) => {
+  const prefersReducedMotion = useReducedMotion();
+  
+  // Simplified animation for users who prefer reduced motion
+  const animations = prefersReducedMotion 
+    ? {
+        initial: { opacity: 0.9 },
+        whileInView: { opacity: 1 },
+        viewport: { once: true, margin: "-100px" },
+        transition: { duration: 0.3, ease: "easeOut" }
+      } 
+    : {
+        initial: { opacity: 0, y: 50 },
+        whileInView: { opacity: 1, y: 0 },
+        viewport: { once: true, margin: "-100px" },
+        transition: { duration: 0.8, ease: "easeOut" }
+      };
+  
   return (
     <motion.section
       id={id}
       className={className}
-      initial={{ opacity: 0, y: 50 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-100px" }}
-      transition={{ duration: 0.8, ease: "easeOut" }}
+      {...animations}
     >
       {children}
     </motion.section>
   );
-};
+});
+
+// Add display name for debugging
+AnimatedSection.displayName = 'AnimatedSection';
 
 export default function Home() {
   // Array de habilidades actuales con sus respectivos iconos
@@ -83,18 +99,12 @@ export default function Home() {
   ];
 
   return (
-    <div className="relative min-h-screen bg-transparent">
-      {/* Background Effect */}
-      <ExoticBackground />
-      
-      {/* Navigation (global) */}
-      <Navigation />
-      
+    <div className="relative min-h-screen">
       <main className="relative flex flex-col items-center justify-center w-full overflow-hidden text-white">
         {/* Hero section - Desktop shows information on left, image on right. Mobile only shows the image with buttons */}
-        <section id="home" className="flex flex-col w-full min-h-[100vh] justify-center items-center">
-          <div className="max-w-[1180px] mx-auto w-full px-4 py-8">
-            <div className="flex flex-col md:flex-row-reverse items-center justify-between gap-8 w-full">
+        <section id="home" className="flex flex-col w-full md:min-h-[100vh] justify-center items-center">
+          <div className="max-w-[1180px] mx-auto w-full px-4 py-4 md:py-8">
+            <div className="flex flex-col md:flex-row-reverse items-center justify-center gap-8 w-full">
               <ProfileSection />
               <AboutSection />
             </div>
@@ -103,11 +113,11 @@ export default function Home() {
         </section>
 
         {/* About Me Section - with improved content structure */}
-        <AnimatedSection id="about" className="py-16 md:py-24 relative z-10 w-full">
+        <AnimatedSection id="about" className="py-4 relative z-10 w-full">
           <div className="max-w-[1180px] mx-auto px-4">
             {/* ABOUT ME HEADER */}
             <motion.div 
-              className="flex justify-center mb-12"
+              className="flex justify-center mb-6 md:mb-12"
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}

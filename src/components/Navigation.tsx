@@ -75,38 +75,44 @@ export function Navigation() {
           
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
-            <div className="flex items-center gap-6">
-              <Link 
-                href="#about" 
-                className="text-sm text-white hover:text-primary transition-colors duration-300 relative group"
-              >
-                About me
-                <span className="absolute -bottom-1 left-0 h-[1px] bg-primary/60 w-0 group-hover:w-full transition-all duration-300"></span>
-              </Link>
-              <Link 
-                href="#skills" 
-                className="text-sm text-white hover:text-primary transition-colors duration-300 relative group"
-              >
-                Skills
-                <span className="absolute -bottom-1 left-0 h-[1px] bg-primary/60 w-0 group-hover:w-full transition-all duration-300"></span>
-              </Link>
-              <Link 
-                href="#certificates" 
-                className="text-sm text-white hover:text-primary transition-colors duration-300 relative group"
-              >
-                Certificates
-                <span className="absolute -bottom-1 left-0 h-[1px] bg-primary/60 w-0 group-hover:w-full transition-all duration-300"></span>
-              </Link>
-              {/* 
-              <Link 
-                href="#portfolio" 
-                className="text-sm text-white hover:text-primary transition-colors duration-300 relative group"
-              >
-                Portfolio
-                <span className="absolute -bottom-1 left-0 h-[1px] bg-primary/60 w-0 group-hover:w-full transition-all duration-300"></span>
-              </Link>
-              */}
-            </div>
+            <ul className="flex items-center gap-6">
+              <li>
+                <Link 
+                  href="#about" 
+                  className="text-sm text-white hover:text-primary transition-colors duration-300 relative group"
+                >
+                  About me
+                  <span className="absolute -bottom-1 left-0 h-[1px] bg-primary/60 w-0 group-hover:w-full transition-all duration-300"></span>
+                </Link>
+              </li>
+              <li>
+                <Link 
+                  href="#skills" 
+                  className="text-sm text-white hover:text-primary transition-colors duration-300 relative group"
+                >
+                  Skills
+                  <span className="absolute -bottom-1 left-0 h-[1px] bg-primary/60 w-0 group-hover:w-full transition-all duration-300"></span>
+                </Link>
+              </li>
+              <li>
+                <Link 
+                  href="#certificates" 
+                  className="text-sm text-white hover:text-primary transition-colors duration-300 relative group"
+                >
+                  Certificates
+                  <span className="absolute -bottom-1 left-0 h-[1px] bg-primary/60 w-0 group-hover:w-full transition-all duration-300"></span>
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/portfolio"
+                  className="text-sm text-white hover:text-primary transition-colors duration-300 relative group"
+                >
+                  Portfolio
+                  <span className="absolute -bottom-1 left-0 h-[1px] bg-primary/60 w-0 group-hover:w-full transition-all duration-300"></span>
+                </Link>
+              </li>
+            </ul>
             
             <Button 
               asChild
@@ -153,50 +159,56 @@ export function Navigation() {
               transition={{ duration: 0.3 }}
             >
               <div className="mx-auto px-4 py-8 flex flex-col items-center gap-8 max-w-[1180px]">
-                <div className="flex flex-col items-center gap-8 w-full">
-                  <Link 
-                    href="#about" 
-                    className="text-xl text-white hover:text-primary transition-colors duration-300 relative group"
-                    onClick={closeMenu}
-                  >
-                    About me
-                    <span className="absolute -bottom-1 left-0 right-0 mx-auto h-[1px] bg-primary/60 w-0 group-hover:w-full transition-all duration-300"></span>
-                  </Link>
-                  <Link 
-                    href="#skills" 
-                    className="text-xl text-white hover:text-primary transition-colors duration-300 relative group"
-                    onClick={closeMenu}
-                  >
-                    Skills
-                    <span className="absolute -bottom-1 left-0 right-0 mx-auto h-[1px] bg-primary/60 w-0 group-hover:w-full transition-all duration-300"></span>
-                  </Link>
-                  <Link 
-                    href="#certificates" 
-                    className="text-xl text-white hover:text-primary transition-colors duration-300 relative group"
-                    onClick={closeMenu}
-                  >
-                    Certificates
-                    <span className="absolute -bottom-1 left-0 right-0 mx-auto h-[1px] bg-primary/60 w-0 group-hover:w-full transition-all duration-300"></span>
-                  </Link>
-                  {/* 
-                  <Link 
-                    href="#portfolio" 
-                    className="text-xl text-white hover:text-primary transition-colors duration-300 relative group"
-                    onClick={closeMenu}
-                  >
-                    Portfolio
-                    <span className="absolute -bottom-1 left-0 right-0 mx-auto h-[1px] bg-primary/60 w-0 group-hover:w-full transition-all duration-300"></span>
-                  </Link>
-                  */}
-                  
-                  <Button 
-                    asChild
-                    className="glass-button whitespace-nowrap mt-4 w-full"
-                    onClick={closeMenu}
-                  >
-                    <Link href="#contact">CONTACT ME</Link>
-                  </Button>
-                </div>
+                <ul className="flex flex-col items-center gap-8 w-full">
+                  <li>
+                    <Link 
+                      href="#about" 
+                      className="text-xl text-white hover:text-primary transition-colors duration-300 relative group"
+                      onClick={closeMenu}
+                    >
+                      About me
+                      <span className="absolute -bottom-1 left-0 right-0 mx-auto h-[1px] bg-primary/60 w-0 group-hover:w-full transition-all duration-300"></span>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link 
+                      href="#skills" 
+                      className="text-xl text-white hover:text-primary transition-colors duration-300 relative group"
+                      onClick={closeMenu}
+                    >
+                      Skills
+                      <span className="absolute -bottom-1 left-0 right-0 mx-auto h-[1px] bg-primary/60 w-0 group-hover:w-full transition-all duration-300"></span>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link 
+                      href="#certificates" 
+                      className="text-xl text-white hover:text-primary transition-colors duration-300 relative group"
+                      onClick={closeMenu}
+                    >
+                      Certificates
+                      <span className="absolute -bottom-1 left-0 right-0 mx-auto h-[1px] bg-primary/60 w-0 group-hover:w-full transition-all duration-300"></span>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/portfolio"
+                      className="text-xl text-white hover:text-primary transition-colors duration-300 relative group"
+                      onClick={closeMenu}
+                    >
+                      Portfolio
+                      <span className="absolute -bottom-1 left-0 right-0 mx-auto h-[1px] bg-primary/60 w-0 group-hover:w-full transition-all duration-300"></span>
+                    </Link>
+                  </li>
+                </ul>
+                
+                <Button 
+                  asChild
+                  className="glass-button whitespace-nowrap mt-4 w-full"
+                  onClick={closeMenu}
+                >
+                  <Link href="#contact">CONTACT ME</Link>
+                </Button>
               </div>
             </motion.div>
           </div>
