@@ -103,15 +103,6 @@ export function Navigation() {
                   <span className="absolute -bottom-1 left-0 h-[1px] bg-primary/60 w-0 group-hover:w-full transition-all duration-300"></span>
                 </Link>
               </li>
-              <li>
-                <Link
-                  href="/portfolio"
-                  className="text-sm text-white hover:text-primary transition-colors duration-300 relative group"
-                >
-                  Portfolio
-                  <span className="absolute -bottom-1 left-0 h-[1px] bg-primary/60 w-0 group-hover:w-full transition-all duration-300"></span>
-                </Link>
-              </li>
             </ul>
             
             <Button 
@@ -187,16 +178,6 @@ export function Navigation() {
                       onClick={closeMenu}
                     >
                       Certificates
-                      <span className="absolute -bottom-1 left-0 right-0 mx-auto h-[1px] bg-primary/60 w-0 group-hover:w-full transition-all duration-300"></span>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href="/portfolio"
-                      className="text-xl text-white hover:text-primary transition-colors duration-300 relative group"
-                      onClick={closeMenu}
-                    >
-                      Portfolio
                       <span className="absolute -bottom-1 left-0 right-0 mx-auto h-[1px] bg-primary/60 w-0 group-hover:w-full transition-all duration-300"></span>
                     </Link>
                   </li>
